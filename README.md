@@ -4,7 +4,7 @@ Lambda voltada para realizar envios de notificação, usando topics do SNS.
 
 ## Testando localmente
 
-Como realizar o invoke localmente.
+Como testarlocalmente.
 
 ```
 serverless invoke local -f notifier -p ./test.json

@@ -17,7 +17,9 @@ const get = async (url) => {
 module.exports.notifier = async (event, context) => {
   try {
     const message = event.Records[0].Sns.Message
-    const url = `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage?chat_id=${process.env.CHAT_ID}&text=${message}`
+    const obj = JSON.parse(message)
+    const mountPayload = encodeURIComponent(`${obj.NewStateValue}: ${obj.AlarmDescription}`)
+    const url = `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage?chat_id=${process.env.CHAT_ID}&text=${mountPayload}`
     await get(url);
   } catch (error) {
     console.log(`Failed: ${error}`);

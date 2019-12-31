@@ -10,4 +10,7 @@ functions:
   notifier:
     handler: handler.notifier
     description: Lambda responsável em enviar notificações no telegram, usando o SNS como trigger
+    events:
+      - sns: ${SNS}
+
 

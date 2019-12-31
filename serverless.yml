@@ -3,6 +3,8 @@ service: lambda-notifier
 provider:
   name: aws
   runtime: nodejs12.x
+  memorySize: 128
+  timeout: 1 
 
 functions:
   notifier:

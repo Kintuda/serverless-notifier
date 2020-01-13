@@ -1,17 +1,18 @@
 'use strict'
+
 const https = require('https')
-const get = async (url) => {
-  return new Promise((resolve, reject) => {
-    https.get(url, (response) => {
-      if (response.statusCode !== 200) {
-        reject(`Failed: status code diferente de 200!`)
-      }
-      resolve()
-    }).on("error", (error) => {
-      reject(error && error.message)
-    })
+const { BOT_TOKEN, CHAT_ID } = process.env
+
+const get = async url => new Promise((resolve, reject) => {
+  https.get(url, (response) => {
+    if (response.statusCode !== 200) {
+      return reject(`Failed: status code diferente de 200!`)
+    }
+    return resolve()
+  }).on("error", (error) => {
+    return reject(error)
   })
-}
+})
 
 
 module.exports.notifier = async (event, context) => {
@@ -19,10 +20,10 @@ module.exports.notifier = async (event, context) => {
     const message = event.Records[0].Sns.Message
     const obj = JSON.parse(message)
     const mountPayload = encodeURIComponent(`${obj.NewStateValue}: ${obj.AlarmDescription}`)
-    const url = `https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage?chat_id=${process.env.CHAT_ID}&text=${mountPayload}`
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${mountPayload}`
     await get(url);
   } catch (error) {
-    console.log(`Failed: ${error}`);
+    console.log(`Failed: ${error && error.message}`);
     throw error
   }
 }

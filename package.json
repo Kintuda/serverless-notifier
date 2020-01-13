@@ -1,0 +1,20 @@
+{
+  "name": "serverless-notifier",
+  "version": "1.0.0",
+  "description": "Script para realizar envios de notificação via Telegram quando houver um trigger do cloudwatch alarms.",
+  "main": "handler.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kintuda/serverless-notifier.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kintuda/serverless-notifier/issues"
+  },
+  "homepage": "https://github.com/Kintuda/serverless-notifier#readme"
+}
